@@ -21,12 +21,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin getAdminByUsername(String username) {
-        if(!isAdminExist(username))
-           throw new AdminNotFoundException();
+        if (!isAdminExist(username))
+            throw new AdminNotFoundException();
         return adminRepository.getOne(username);
     }
 
-    private Boolean isAdminExist(String username){
+    private Boolean isAdminExist(String username) {
         return adminRepository.findById(username).isPresent();
     }
 
@@ -37,6 +37,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin updateAdmin(Admin admin) {
-        return this.createAdmin(admin);
+        this.getAdminByUsername(admin.getUsername());
+        return adminRepository.save(admin);
     }
 }
