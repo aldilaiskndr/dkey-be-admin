@@ -14,32 +14,35 @@ public class AdminController {
     AdminService adminService;
 
     @PutMapping
-    public Admin createAdmin(@RequestBody Admin admin){
+    public Admin createAdmin(@RequestBody Admin admin) {
         return adminService.createAdmin(admin);
     }
 
     @GetMapping("/{username}")
-    public Admin getAdminById(@PathVariable String username){
+    public Admin getAdminById(@PathVariable String username) {
         return adminService.getAdminByUsername(username);
     }
 
     @DeleteMapping("/{username}")
-    public void deleteAdminByUsername(@PathVariable String username){
+    public void deleteAdminByUsername(@PathVariable String username) {
         adminService.deleteAdmin(username);
     }
 
     @PostMapping
-    public Admin updateAdmin(@RequestBody Admin admin){
+    public Admin updateAdmin(@RequestBody Admin admin) {
         return adminService.updateAdmin(admin);
     }
 
+    // learn rest template
     @GetMapping("/mock/{id}")
-    public Song getRestTemplate(@PathVariable String id){
+    public Song getRestTemplate(@PathVariable String id) {
         RestTemplate restTemplate = new RestTemplate();
-        String resourceUrl = "http://localhost:4000/song/"+id;
+        String resourceUrl = "http://localhost:4000/song/" + id;
         return restTemplate.getForEntity(resourceUrl, Song.class).getBody();
     }
 }
+// class for learn rest template
+
 
 class Song{
     private Integer id;
